@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>英语听力考试音频生成工具</title>
+  <title>英语听力教学（考试）音频生成</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   
@@ -43,28 +43,27 @@
 <body class="bg-gray-50 min-h-screen font-sans">
   <!-- 提示音音频元素（隐藏） -->
   <audio id="dingSound" preload="auto">
+    <!-- 使用多个备选音频源 -->
     <source src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" type="audio/mpeg">
     <source src="https://soundbible.com/grab.php?id=1598&type=mp3" type="audio/mpeg">
   </audio>
   
-  <!-- 顶部导航 - 左(logo+标题)-中(创作信息)-右(帮助)布局 -->
+  <!-- 顶部导航 - 严格左-中-右布局 -->
   <header class="bg-white shadow-md fixed w-full top-0 z-50 transition-all duration-300">
-    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-      <!-- 左侧：logo + 标题（英语听力考试音频生成工具）水平组合 -->
-      <div class="flex items-center space-x-3">
-        <!-- 左侧logo -->
-        <img src="./systemfile/logo.jpg" alt="石狮初中英语选编" class="w-16 h-16 object-contain" id="toolLogo">
-        <!-- 左侧标题 -->
-        <h1 class="text-lg md:text-xl font-bold text-gray-800">英语听力考试音频生成工具</h1>
+    <div class="container mx-auto px-4 py-6 flex items-center justify-between">
+      <!-- 左侧：标题（英语听力考试音频生成工具） -->
+      <div class="flex items-center">
+        <h1 class="text-xl md:text-2xl font-bold text-gray-800 text-left">英语听力教学（考试）音频生成</h1>
       </div>
       
-      <!-- 中间：创作/指导信息（水平排列，居中显示） -->
-      <div class="hidden md:flex items-center text-base text-gray-800 font-semibold text-center">
-        创作：石狮市第二中学洪振芳；指导：石狮市教师进修学校李涌
-      </div>
-      <!-- 移动端中间信息（单独显示，适配小屏幕） -->
-      <div class="md:hidden text-sm text-gray-800 font-medium text-center">
-        创作：石狮二中洪振芳；指导：进修学校李涌
+      <!-- 中间：logo + 创作/指导信息（水平排列） -->
+      <div class="flex items-center space-x-4">
+        <!-- 加大logo：w-20 h-20 -->
+        <img src="./systemfile/logo.jpg" alt="石狮初中英语选编" class="w-20 h-20 object-contain" id="toolLogo">
+        <!-- 创作/指导信息（加大字体） -->
+        <div class="text-base md:text-lg text-gray-800 font-semibold text-center">
+          创作：石狮市第二中学洪振芳；<br class="md:hidden">指导：石狮市教师进修学校李涌
+        </div>
       </div>
       
       <!-- 右侧：帮助按钮 -->
@@ -74,17 +73,14 @@
         </button>
       </div>
       
-      <!-- 移动端菜单按钮（仅移动端显示，点击展开完整导航） -->
+      <!-- 移动端菜单按钮（仅移动端显示） -->
       <button class="md:hidden text-gray-700 ml-4" id="mobileMenuBtn">
         <i class="fa fa-bars text-2xl"></i>
       </button>
     </div>
-    <!-- 移动端展开菜单 -->
+    <!-- 移动端菜单 - 保持原有功能 -->
     <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-2">
-      <div class="w-full text-left py-2 flex items-center space-x-2">
-        <img src="./systemfile/logo.jpg" alt="logo" class="w-10 h-10 object-contain">
-        <span class="text-lg font-bold text-gray-800">英语听力考试音频生成工具</span>
-      </div>
+      <div class="w-full text-left py-2 text-xl font-bold text-gray-800">英语听力考试音频生成工具</div>
       <button id="mobileHelpBtn" class="w-full text-left py-2 text-neutral hover:text-primary transition-colors flex items-center">
         <i class="fa fa-question-circle mr-2"></i> 帮助
       </button>
@@ -94,8 +90,8 @@
     </div>
   </header>
 
-  <!-- 主内容区 -->
-  <main class="container mx-auto px-4 pt-36 md:pt-40 pb-16">
+  <!-- 主内容区 - 调整顶部内边距（适配导航栏高度） -->
+  <main class="container mx-auto px-4 pt-44 pb-16">
     <!-- 介绍卡片 -->
     <div class="bg-white rounded-lg shadow-sm p-5 mb-6">
       <p class="text-gray-700">
@@ -157,6 +153,7 @@ M: How are you?
               <label class="block text-sm font-medium text-gray-700 mb-1">中文指令声音</label>
               <div class="flex items-center">
                 <select id="chineseVoice" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 focus:ring-opacity-50">
+                  <!-- 选项将由JS动态填充 -->
                   <option value="">加载中...</option>
                 </select>
               </div>
@@ -167,6 +164,7 @@ M: How are you?
               <label class="block text-sm font-medium text-gray-700 mb-1">英文女声</label>
               <div class="flex items-center">
                 <select id="femaleVoice" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 focus:ring-opacity-50">
+                  <!-- 选项将由JS动态填充 -->
                   <option value="">加载中...</option>
                 </select>
               </div>
@@ -177,6 +175,7 @@ M: How are you?
               <label class="block text-sm font-medium text-gray-700 mb-1">英文男声</label>
               <div class="flex items-center">
                 <select id="maleVoice" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 focus:ring-opacity-50">
+                  <!-- 选项将由JS动态填充 -->
                   <option value="">加载中...</option>
                 </select>
               </div>
@@ -219,7 +218,7 @@ M: How are you?
           </div>
         </div>
         
-        <!-- 操作控制 -->
+        <!-- 操作控制 - 已删除下载按钮和进度条 -->
         <div class="bg-white rounded-lg shadow-sm p-4">
           <h2 class="font-semibold text-gray-800 mb-4">考试控制</h2>
           
@@ -243,7 +242,7 @@ M: How are you?
       </div>
     </div>
     
-    <!-- 音频播放区 -->
+    <!-- 音频播放区 - 已移除audio标签的进度条 -->
     <div class="mt-6 bg-white rounded-lg shadow-sm p-4 hidden" id="audioPlayerContainer">
       <h2 class="font-semibold text-gray-800 mb-3">听力考试播放</h2>
       <div class="flex flex-col md:flex-row gap-4 items-center justify-center">
@@ -347,11 +346,11 @@ M: How are you?
     let utterances = [];
     let isPlaying = false;
     let currentUtteranceIndex = 0;
-    let voiceLoadAttempts = 0;
-    let useFallbackDing = false;
-    let pauseTimeout = null;
+    let voiceLoadAttempts = 0; // 语音加载尝试次数
+    let useFallbackDing = false; // 是否使用备选提示音
+    let pauseTimeout = null; // 停顿计时器
 
-    // 2022年福建省初中学业水平考试英语听力内容
+    // 2022年福建省初中学业水平考试英语听力内容（带提示音）
     const fujianExam2022 = `D:
 C: 听力试听，并启封试卷袋
 D:
@@ -504,58 +503,76 @@ P: 20
 D:
 C: 听力考试到此结束。请考生将正确答案转写到答题卡上，接着完成试卷上的其他题。`;
 
-    // 播放提示音
+    // 播放提示音 - 改进版本
     function playDingSound() {
       return new Promise((resolve) => {
+        // 设置提示音音量
         dingSound.volume = parseFloat(dingVolume.value);
+        
+        // 先暂停任何正在播放的提示音
         dingSound.pause();
         dingSound.currentTime = 0;
         
+        // 尝试播放外部音频
         const playPromise = dingSound.play();
         
         if (playPromise !== undefined) {
           playPromise.then(() => {
+            // 音频播放成功
             dingSound.onended = resolve;
           }).catch(error => {
             console.log("外部提示音播放失败:", error);
+            // 如果外部音频失败，使用备选方法生成提示音
             playFallbackDing().then(resolve);
           });
         } else {
+          // 如果play()返回undefined（某些旧浏览器），使用备选方法
           playFallbackDing().then(resolve);
         }
       });
     }
 
-    // 备选提示音
+    // 备选提示音 - 使用Web Audio API生成
     function playFallbackDing() {
       return new Promise((resolve) => {
         try {
+          // 创建音频上下文
           const audioContext = new (window.AudioContext || window.webkitAudioContext)();
           const oscillator = audioContext.createOscillator();
           const gainNode = audioContext.createGain();
           
+          // 配置振荡器（生成声音）
           oscillator.type = 'sine';
-          oscillator.frequency.value = 800;
+          oscillator.frequency.value = 800; // 频率 (Hz)
+          
+          // 配置增益（音量）
           gainNode.gain.value = parseFloat(dingVolume.value) * 0.3;
           
+          // 连接节点
           oscillator.connect(gainNode);
           gainNode.connect(audioContext.destination);
           
+          // 播放声音
           oscillator.start();
+          
+          // 设置声音淡出效果
           gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
           
+          // 停止播放
           setTimeout(() => {
             oscillator.stop();
             audioContext.close();
             resolve();
           }, 500);
           
+          // 标记使用备选提示音
           if (!useFallbackDing) {
             useFallbackDing = true;
             showNotification('使用备选提示音生成方法', 'info');
           }
         } catch (error) {
           console.log("备选提示音生成失败:", error);
+          // 如果所有方法都失败，等待一段时间后继续
           setTimeout(resolve, 500);
         }
       });
@@ -563,11 +580,16 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
 
     // 初始化
     function init() {
+      // 填充可用语音选项（增加重试机制）
       populateVoiceOptions();
+      
+      // 监听语音列表加载完成
       window.speechSynthesis.onvoiceschanged = populateVoiceOptions;
       
+      // 文本输入事件监听
       scriptInput.addEventListener('input', updateTextStats);
       
+      // 按钮事件监听
       clearTextBtn.addEventListener('click', clearText);
       loadExamBtn.addEventListener('click', loadExamText);
       generateBtn.addEventListener('click', generateAudio);
@@ -575,20 +597,24 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
       playSelectedBtn.addEventListener('click', playSelectedParagraph);
       stopBtn.addEventListener('click', stopPlayback);
       
+      // 滑块事件监听
       speechRate.addEventListener('input', () => {
         rateValue.textContent = speechRate.value;
       });
       
+      // 提示音音量控制
       dingVolume.addEventListener('input', () => {
         dingSound.volume = parseFloat(dingVolume.value);
       });
       
+      // 测试提示音按钮
       testDingBtn.addEventListener('click', () => {
         playDingSound().then(() => {
           showNotification('提示音测试完成', 'success');
         });
       });
       
+      // 模态框事件监听
       helpBtn.addEventListener('click', () => helpModal.classList.replace('hidden', 'flex'));
       mobileHelpBtn.addEventListener('click', () => {
         helpModal.classList.replace('hidden', 'flex');
@@ -596,13 +622,17 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
       });
       closeHelpBtn.addEventListener('click', () => helpModal.classList.add('hidden'));
       
+      // 移动端菜单切换
       mobileMenuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
       });
       
+      // 初始化文本统计
       updateTextStats();
       
+      // 预加载提示音
       setTimeout(() => {
+        // 尝试预加载提示音，但不播放
         dingSound.load();
       }, 1000);
     }
@@ -611,14 +641,17 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
     function populateVoiceOptions() {
       const voices = speechSynthesis.getVoices();
       
+      // 过滤中文语音
       const chineseVoices = voices.filter(voice => 
         voice.lang.startsWith('zh') || 
         voice.lang.startsWith('cmn') ||
         voice.name.toLowerCase().includes('chinese')
       );
       
+      // 过滤英语语音
       const englishVoices = voices.filter(voice => voice.lang.startsWith('en'));
       
+      // 英语语音性别过滤
       const femaleVoices = englishVoices.filter(voice => {
         const name = voice.name.toLowerCase();
         return name.includes('female') || name.includes('woman') || name.includes('girl') || 
@@ -633,14 +666,17 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
                name.includes('m');
       });
       
+      // 保存当前选中值
       const currentFemale = femaleVoice.value;
       const currentMale = maleVoice.value;
       const currentChinese = chineseVoice.value;
       
+      // 清空选项
       femaleVoice.innerHTML = '';
       maleVoice.innerHTML = '';
       chineseVoice.innerHTML = '';
       
+      // 处理中文语音选项
       if (chineseVoices.length > 0) {
         chineseVoices.forEach(voice => {
           const option = document.createElement('option');
@@ -649,6 +685,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
           chineseVoice.appendChild(option);
         });
       } else {
+        // 如果没有找到中文语音，使用通用语音作为备选
         if (voices.length > 0) {
           voices.forEach(voice => {
             const option = document.createElement('option');
@@ -665,6 +702,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
         }
       }
       
+      // 处理女声选项
       if (femaleVoices.length > 0) {
         femaleVoices.forEach(voice => {
           const option = document.createElement('option');
@@ -689,6 +727,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
         }
       }
       
+      // 处理男声选项
       if (maleVoices.length > 0) {
         maleVoices.forEach(voice => {
           const option = document.createElement('option');
@@ -720,6 +759,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
         }
       }
       
+      // 恢复选中值或使用第一个选项
       if (chineseVoices.some(v => v.voiceURI === currentChinese) || 
           (chineseVoice.options.length > 0 && chineseVoice.options[0].value !== '')) {
         if (currentChinese && chineseVoice.querySelector(`option[value="${currentChinese}"]`)) {
@@ -747,6 +787,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
         }
       }
       
+      // 最多尝试5次加载语音
       if ((chineseVoices.length === 0 || englishVoices.length === 0) && voiceLoadAttempts < 5) {
         voiceLoadAttempts++;
         setTimeout(populateVoiceOptions, 1000);
@@ -755,34 +796,41 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
 
     // 生成考试音频
     async function generateAudio() {
+      // 停止任何正在进行的语音
       stopPlayback();
       
+      // 检查浏览器支持
       if (!('speechSynthesis' in window)) {
         showNotification('您的浏览器不支持语音合成功能，请使用Chrome或Edge浏览器', 'error');
         return;
       }
       
+      // 检查语音是否可用
       const voices = speechSynthesis.getVoices();
       if (voices.length === 0) {
         showNotification('语音库尚未加载完成，请等待几秒后重试', 'warning');
         return;
       }
       
+      // 检查语音是否选择
       if (!femaleVoice.value || !maleVoice.value || !chineseVoice.value) {
         showNotification('请先选择所有可用的语音', 'error');
         return;
       }
       
+      // 检查输入内容
       const segments = parseScript();
       if (!segments) {
         showNotification('请输入有效的听力文稿', 'error');
         return;
       }
       
+      // 准备生成
       generateBtn.disabled = true;
       generateBtn.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> 生成中...';
       
       try {
+        // 创建语音合成对象列表
         utterances = [];
         const voices = speechSynthesis.getVoices();
         const femaleVoiceObj = voices.find(v => v.voiceURI === femaleVoice.value) || voices[0];
@@ -792,6 +840,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
         
         segments.forEach((segment, index) => {
           if (segment.type === 'pause') {
+            // 创建停顿对象
             utterances.push({
               type: 'pause',
               index: index,
@@ -799,15 +848,18 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
               text: `停顿 ${segment.duration} 秒`
             });
           } else if (segment.type === 'ding') {
+            // 提示音标记
             utterances.push({
               type: 'ding',
               index: index,
               text: '提示音'
             });
           } else {
+            // 创建语音合成对象
             const utterance = new SpeechSynthesisUtterance(segment.text);
             utterance.rate = rate;
             
+            // 根据类型设置不同的语音
             if (segment.type === 'chinese') {
               utterance.voice = chineseVoiceObj;
               utterance.lang = chineseVoiceObj.lang;
@@ -826,9 +878,12 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
           }
         });
         
+        // 显示音频播放区
         audioPlayerContainer.classList.remove('hidden');
+        // 生成段落列表
         generateSegmentsList(segments);
         
+        // 启用按钮
         playBtn.disabled = false;
         
         showNotification('考试音频生成完成', 'success');
@@ -836,6 +891,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
         console.error('生成音频失败:', error);
         showNotification('生成音频失败，请重试', 'error');
       } finally {
+        // 恢复按钮状态
         generateBtn.disabled = false;
         generateBtn.innerHTML = '<i class="fa fa-magic mr-2"></i> 生成考试音频';
       }
@@ -864,7 +920,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
       showNotification('已加载2022年福建省中考英语听力素材（带提示音）', 'info');
     }
 
-    // 解析脚本
+    // 解析脚本 - 修复停顿时间识别问题
     function parseScript() {
       const lines = scriptInput.value.split('\n');
       const segments = [];
@@ -886,10 +942,11 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
           content = trimmedLine.substring(2).trim();
         } else if (trimmedLine.startsWith('P:')) {
           type = 'pause';
+          // 修复停顿时间提取问题
           const durationText = trimmedLine.substring(2).trim();
           duration = parseFloat(durationText);
           if (isNaN(duration) || duration <= 0) {
-            duration = 2;
+            duration = 2; // 默认2秒
           }
           content = `停顿 ${duration} 秒`;
         } else if (trimmedLine.startsWith('D:')) {
@@ -982,12 +1039,17 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
         speechSynthesis.cancel();
       }
       
+      // 依次播放所有片段
       playNextUtterance(currentUtteranceIndex);
     }
 
-    // 播放下一个语音片段
+    // 播放下一个语音片段 - 彻底修复停顿处理
     function playNextUtterance(index) {
+      console.log(`播放片段 ${index}, 类型: ${utterances[index]?.type}, 总片段数: ${utterances.length}`);
+      
       if (index >= utterances.length || !isPlaying) {
+        // 播放结束
+        console.log('播放结束');
         isPlaying = false;
         currentUtteranceIndex = 0;
         playBtn.innerHTML = '<i class="fa fa-play mr-2"></i> 开始播放考试';
@@ -997,18 +1059,28 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
       currentUtteranceIndex = index;
       const utterance = utterances[index];
       
+      // 根据类型处理不同的播放方式
       if (utterance.type === 'ding') {
+        console.log('播放提示音');
+        // 播放提示音
         playDingSound().then(() => {
+          // 提示音播放完成后继续下一个
           playNextUtterance(index + 1);
         });
       } else if (utterance.type === 'pause' && utterance.duration) {
+        console.log(`开始停顿 ${utterance.duration} 秒`);
+        // 处理停顿 - 使用setTimeout而不是语音合成
         pauseTimeout = setTimeout(() => {
+          console.log(`停顿结束`);
           playNextUtterance(index + 1);
         }, utterance.duration * 1000);
       } else if (typeof utterance === 'object' && 'text' in utterance) {
+        console.log(`播放语音: ${utterance.text.substring(0, 30)}...`);
+        // 处理语音合成
         const currentUtterance = new SpeechSynthesisUtterance(utterance.text);
         currentUtterance.rate = parseFloat(speechRate.value);
         
+        // 设置对应的语音
         const voices = speechSynthesis.getVoices();
         if (utterance.type === 'chinese') {
           currentUtterance.voice = voices.find(v => v.voiceURI === chineseVoice.value) || voices[0];
@@ -1019,6 +1091,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
         }
         
         currentUtterance.onend = () => {
+          console.log(`语音播放结束`);
           playNextUtterance(index + 1);
         };
         
@@ -1029,6 +1102,8 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
         
         speechSynthesis.speak(currentUtterance);
       } else {
+        // 未知类型，直接继续
+        console.log('未知类型，直接继续');
         playNextUtterance(index + 1);
       }
     }
@@ -1037,6 +1112,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
     function pausePlayback() {
       if (isPlaying) {
         speechSynthesis.pause();
+        // 清除停顿计时器
         if (pauseTimeout) {
           clearTimeout(pauseTimeout);
           pauseTimeout = null;
@@ -1049,6 +1125,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
     // 停止播放
     function stopPlayback() {
       speechSynthesis.cancel();
+      // 清除停顿计时器
       if (pauseTimeout) {
         clearTimeout(pauseTimeout);
         pauseTimeout = null;
@@ -1071,6 +1148,7 @@ C: 听力考试到此结束。请考生将正确答案转写到答题卡上，�
       isPlaying = true;
       playBtn.innerHTML = '<i class="fa fa-pause mr-2"></i> 暂停播放';
       
+      // 播放选中的段落
       playNextUtterance(selectedParagraph);
     }
 
